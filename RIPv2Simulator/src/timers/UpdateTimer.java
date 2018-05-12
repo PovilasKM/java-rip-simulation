@@ -15,11 +15,8 @@ public class UpdateTimer extends TimerTask {
 
     @Override
     public void run() {
-        for (Router r : routers) {
-            r.updateTable(routers);
-
-            //System.out.println(r.getTable().toString());
-            //System.out.println("\n");
+        for (Router router : routers) {
+            router.updateTable(routers);
         }
 
     }

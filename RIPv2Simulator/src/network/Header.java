@@ -1,6 +1,7 @@
 package network;
 
 public class Header {
+    //not really needed tbh
     private int command;
     private String version = "RIPv2";
     private String address_family = "AF_INET";

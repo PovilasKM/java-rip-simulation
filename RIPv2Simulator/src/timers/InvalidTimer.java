@@ -15,9 +15,9 @@ public class InvalidTimer extends TimerTask {
 
     @Override
     public void run() {
-        for (Router r : routers) {
-            if (!r.getSentUpdate())
-                r.setInactive(true);
+        for (Router router : routers) {
+            if (!router.getSentUpdate())
+                router.setInactive(true);
         }
 
     }

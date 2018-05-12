@@ -26,20 +26,24 @@ public class RoutingTable implements Cloneable {
         addRecord(curRouter.getAddress(), 0, "0.0.0.0");
     }
 
-    public void setDestinationIP(List<String> destIPs) {
-        destinationIP = destIPs;
+    public void addNeighbor(String ip) {
+        neighbors.add(ip);
     }
 
-    public void setMetrics(List<Integer> metrics) {
-        metric = metrics;
+    public List<String> getNeighbors() {
+        return neighbors;
     }
 
-    public void setNextHops(List<String> hops) {
-        nextHopIP = hops;
+    public List<String> getDestinations() {
+        return destinationIP;
     }
 
-    public void setNeighbors(List<String> neighborsList) {
-        neighbors = neighborsList;
+    public List<Integer> getMetric() {
+        return metric;
+    }
+
+    public List<String> getNextHopIP() {
+        return nextHopIP;
     }
 
     public void addRecord(String destination, int r_metric, String nextrouter) {
@@ -60,26 +64,6 @@ public class RoutingTable implements Cloneable {
             s += destinationIP.get(i) + "\t" + nextHopIP.get(i) + "\t" + metric.get(i) + "\n";
         }
         return s;
-    }
-
-    public void addNeighbor(String ip) {
-        neighbors.add(ip);
-    }
-
-    public List<String> getNeighbors() {
-        return neighbors;
-    }
-
-    public List<String> getDestinations() {
-        return destinationIP;
-    }
-
-    public List<Integer> getMetric() {
-        return metric;
-    }
-
-    public List<String> getNextHopIP() {
-        return nextHopIP;
     }
 
     public void update(Router router, List<Router> network) {

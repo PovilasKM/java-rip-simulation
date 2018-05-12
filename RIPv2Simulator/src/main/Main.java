@@ -1,10 +1,14 @@
 package main;
 
 import network.NetworkGraph;
+import network.Router;
+import network.RoutingTable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -24,13 +28,15 @@ public class Main {
         networkGraph.addEdge("29.237.71.205", "93.205.217.103", 1);
         networkGraph.addEdge("93.205.217.103", "152.145.34.204", 1);
 
+        showMenu();
+        Scanner in = new Scanner(System.in);
         while (true) {
-            clearConsole();
-            showMenu();
-            Scanner in = new Scanner(System.in);
             int input = in.nextInt();
 
             switch (input) {
+                case 0:
+                    showMenu();
+                    break;
                 case 1:
                     addRouter(networkGraph);
                     break;
@@ -55,7 +61,7 @@ public class Main {
                 case 8:
                     return;
                 default:
-                    System.out.println("wrong input");
+                    System.out.println("wrong input. Type 0 to see the menu");
                     break;
 
             }
@@ -73,19 +79,14 @@ public class Main {
     }
 
     private static void showMenu() {
-        System.out.println("1 Add router");
-        System.out.println("2 Add edge");
-        System.out.println("3 Routers list");
-        System.out.println("4 Edges list");
-        System.out.println("5 Remove edge");
-        System.out.println("6 Show table");
-        System.out.println("7 Send packet");
+        System.out.println("1 Add a router");
+        System.out.println("2 Add an edge");
+        System.out.println("3 See routers' list");
+        System.out.println("4 See edges' list");
+        System.out.println("5 Remove an edge");
+        System.out.println("6 Show router's routing table");
+        System.out.println("7 Send a packet");
 
-    }
-
-    private static void clearConsole() {
-        for (int i = 0; i < 30; i++)
-            System.out.print("");
     }
 
     /*

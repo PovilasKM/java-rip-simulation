@@ -18,9 +18,9 @@ public class InactiveRemoverTimer extends TimerTask {
     		if(r.getInactive()){
     			String address = r.getAddress();
     			for(Router router : routers){
-    				int index = router.getTable().getDestinations().indexOf(address);
+    				int index = router.getRoutingTable().getDestinations().indexOf(address);
     				if(index != -1){
-    					router.getTable().removeRecord(index);
+    					router.getRoutingTable().removeRecord(index);
     				}
     			}
     			routersToRemove.add(r);

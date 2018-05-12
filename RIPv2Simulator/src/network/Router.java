@@ -11,11 +11,11 @@ public class Router {
     private Set<RouterEdge> routerEdges = new HashSet<>();
     private boolean sentUpdate = false;
     private boolean inactive = false;
-    private RoutingTable table;
+    private RoutingTable routingTable;
 
     public Router(String ipAddress) {
         this.ipAddress = ipAddress;
-        table = new RoutingTable(this);
+        routingTable = new RoutingTable(this);
     }
 
     public void setSentUpdate(boolean status) {
@@ -46,12 +46,12 @@ public class Router {
         routerEdges.add(routerEdge);
     }
 
-    public RoutingTable getTable() {
-        return table;
+    public RoutingTable getRoutingTable() {
+        return routingTable;
     }
 
     public void updateTable(List<Router> routers) {
-        table.update(this, routers);
+        routingTable.update(this, routers);
     }
 
     public void receive(String ip, RoutingTable newTable, List<Router> network) {
@@ -67,23 +67,25 @@ public class Router {
                     break;
                 }
             }
-            if (!table.getDestinations().contains(newTable.getDestinations().get(i)) && !newTable.getDestinations().get(i).equals(this.ipAddress)) {
-                table.addRecord(newTable.getDestinations().get(i), newTable.getMetric().get(i) + weight, ip);
+
+            if (!routingTable.getDestinations().contains(newTable.getDestinations().get(i)) && !newTable.getDestinations().get(i).equals(this.ipAddress)) {
+                routingTable.addRecord(newTable.getDestinations().get(i), newTable.getMetric().get(i) + weight, ip);
                 sendTableToNeighbors(ip, network);
             } else {
-                int index = table.getDestinations().indexOf(newTable.getDestinations().get(i));
-                if (table.getNextHopIP().get(index).equals(ip) && table.getMetric().get(index) != newTable.getMetric().get(i) + weight) {
+                int index = routingTable.getDestinations().indexOf(newTable.getDestinations().get(i));
+                if (routingTable.getNextHopIP().get(index).equals(ip) && routingTable.getMetric().get(index) != newTable.getMetric().get(i) + weight) {
 
-                    table.getMetric().set(index, newTable.getMetric().get(i) + weight);
+                    routingTable.getMetric().set(index, newTable.getMetric().get(i) + weight);
                     if (newTable.getMetric().get(i) + weight <= 16)
                         sendTableToNeighbors(ip, network);
                     else
-                        table.getMetric().set(index, 16);
+                        routingTable.getMetric().set(index, 16);
 
                 }
-                if (table.getMetric().get(index) > newTable.getMetric().get(i) + weight) {
-                    table.getMetric().set(index, newTable.getMetric().get(i) + weight);
-                    table.getNextHopIP().set(index, ip);
+
+                if (routingTable.getMetric().get(index) > newTable.getMetric().get(i) + weight) {
+                    routingTable.getMetric().set(index, newTable.getMetric().get(i) + weight);
+                    routingTable.getNextHopIP().set(index, ip);
                     sendTableToNeighbors(ip, network);
                 }
             }
@@ -95,23 +97,23 @@ public class Router {
             String srcAdress = curRouterEdge.getSrc();
             String destAdress = curRouterEdge.getDest();
 
-            String neighbor;
+            String neighborAddress;
             if (this.getAddress().equals(srcAdress)) {
-                neighbor = destAdress;
+                neighborAddress = destAdress;
             } else {
-                neighbor = srcAdress;
+                neighborAddress = srcAdress;
             }
 
-            for (Router r : network) {
-                if (r.getAddress().equals(neighbor)) {
-                    RoutingTable rTable = new RoutingTable(table);
+            for (Router router : network) {
+                if (router.getAddress().equals(neighborAddress)) {
+                    RoutingTable rTable = new RoutingTable(routingTable);
                     try {
                         for (int i = 0; i < rTable.getDestinations().size(); i++) {
-                            if (rTable.getNextHopIP().get(i).equals(r.getAddress())) {
+                            if (rTable.getNextHopIP().get(i).equals(router.getAddress())) {
                                 rTable.getMetric().set(i, 16);
                             }
                         }
-                        r.receive(this.getAddress(), rTable, network);
+                        router.receive(this.getAddress(), rTable, network);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -122,21 +124,27 @@ public class Router {
     }
 
     public void sendPacket(Header header, List<Router> network) {
+        if (header == null || network == null) {
+            System.out.println("Error sending packet");
+            return;
+        }
+
         System.out.print(this.getAddress());
         if (this.getAddress().equals(header.getRoutingDomain())) {
             System.out.println("Packet arrived!");
             return;
         }
-        if (table.getDestinations().contains(header.getRoutingDomain())) {
-            int index = table.getDestinations().indexOf(header.getRoutingDomain());
-            if (table.getMetric().get(index) >= 16) {
+
+        if (routingTable.getDestinations().contains(header.getRoutingDomain())) {
+            int index = routingTable.getDestinations().indexOf(header.getRoutingDomain());
+            if (routingTable.getMetric().get(index) >= 16) {
                 System.out.println("Destination unreachable");
             }
 
-            for (Router r : network) {
-                if (r.getAddress().equals(table.getNextHopIP().get(index))) {
+            for (Router router : network) {
+                if (router.getAddress().equals(routingTable.getNextHopIP().get(index))) {
                     System.out.print("->");
-                    r.sendPacket(header, network);
+                    router.sendPacket(header, network);
                     break;
                 }
             }

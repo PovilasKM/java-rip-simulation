@@ -26,19 +26,23 @@ public class NetworkGraph {
         routers.add(new Router(ip));
     }
 
+    public List<Router> getRouters() {
+        return routers;
+    }
+
     public void addEdge(String sourceIP, String destIP, int weight) {
         Router src = null;
         Router dest = null;
         for (Router r : routers) {
             if (r.getAddress().equals(sourceIP)) {
                 src = r;
-                if (!r.getTable().getNeighbors().contains(destIP)) {
-                    r.getTable().addNeighbor(destIP);
+                if (!r.getRoutingTable().getNeighbors().contains(destIP)) {
+                    r.getRoutingTable().addNeighbor(destIP);
                 }
             }
             if (r.getAddress().equals(destIP)) {
-                if (!r.getTable().getNeighbors().contains(sourceIP)) {
-                    r.getTable().addNeighbor(sourceIP);
+                if (!r.getRoutingTable().getNeighbors().contains(sourceIP)) {
+                    r.getRoutingTable().addNeighbor(sourceIP);
                 }
                 dest = r;
             }
@@ -51,8 +55,8 @@ public class NetworkGraph {
         RouterEdge e = new RouterEdge(src, dest, weight);
         src.addEdge(e);
         dest.addEdge(e);
-        dest.receive(sourceIP, src.getTable(), routers);
-        src.receive(destIP, dest.getTable(), routers);
+        dest.receive(sourceIP, src.getRoutingTable(), routers);
+        src.receive(destIP, dest.getRoutingTable(), routers);
 
         routerEdges.add(e);
     }
@@ -72,7 +76,7 @@ public class NetworkGraph {
     public void printTable(String ip) {
         for (Router r : routers) {
             if (r.getAddress().equals(ip))
-                System.out.print(r.getTable().toString());
+                System.out.print(r.getRoutingTable().toString());
         }
     }
 
@@ -84,37 +88,37 @@ public class NetworkGraph {
                     break;
                 }
             }
-            if (router.getTable().getDestinations().contains(src) && router.getAddress().equals(dest)) {
-                int index = router.getTable().getDestinations().indexOf(src);
-                router.getTable().getMetric().set(index, 16);
+            if (router.getRoutingTable().getDestinations().contains(src) && router.getAddress().equals(dest)) {
+                int index = router.getRoutingTable().getDestinations().indexOf(src);
+                router.getRoutingTable().getMetric().set(index, 16);
                 router.updateTable(routers);
 
             }
-            if (router.getTable().getDestinations().contains(dest) && router.getAddress().equals(src)) {
-                int index = router.getTable().getDestinations().indexOf(dest);
-                router.getTable().getMetric().set(index, 16);
+            if (router.getRoutingTable().getDestinations().contains(dest) && router.getAddress().equals(src)) {
+                int index = router.getRoutingTable().getDestinations().indexOf(dest);
+                router.getRoutingTable().getMetric().set(index, 16);
                 router.updateTable(routers);
 
             }
-            if (router.getTable().getNextHopIP().contains(dest) && router.getAddress().equals(src)) {
+            if (router.getRoutingTable().getNextHopIP().contains(dest) && router.getAddress().equals(src)) {
                 //remove source
-                int index = router.getTable().getNextHopIP().indexOf(dest);
+                int index = router.getRoutingTable().getNextHopIP().indexOf(dest);
                 while (index != -1) {
-                    router.getTable().getMetric().set(index, 16);
-                    router.getTable().getNextHopIP().set(index, "0.0.0.0");
+                    router.getRoutingTable().getMetric().set(index, 16);
+                    router.getRoutingTable().getNextHopIP().set(index, "0.0.0.0");
                     router.updateTable(routers);
-                    index = router.getTable().getNextHopIP().indexOf(dest);
+                    index = router.getRoutingTable().getNextHopIP().indexOf(dest);
                 }
 
             }
-            if (router.getTable().getNextHopIP().contains(src) && router.getAddress().equals(dest)) {
-                int index = router.getTable().getNextHopIP().indexOf(src);
+            if (router.getRoutingTable().getNextHopIP().contains(src) && router.getAddress().equals(dest)) {
+                int index = router.getRoutingTable().getNextHopIP().indexOf(src);
                 while (index != -1) {
                     int dontAskAboutThis; //don't
-                    router.getTable().getMetric().set(index, 16);
-                    router.getTable().getNextHopIP().set(index, "0.0.0.0");
+                    router.getRoutingTable().getMetric().set(index, 16);
+                    router.getRoutingTable().getNextHopIP().set(index, "0.0.0.0");
                     router.updateTable(routers);
-                    index = router.getTable().getNextHopIP().indexOf(src);
+                    index = router.getRoutingTable().getNextHopIP().indexOf(src);
                 }
             }
         }
