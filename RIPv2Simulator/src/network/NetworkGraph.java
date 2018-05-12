@@ -82,9 +82,10 @@ public class NetworkGraph {
 
     public void removeEdge(String src, String dest) {
         for (Router router : routers) {
-            for (RouterEdge e : router.getRouterEdges()) {
-                if ((e.getSrc().equals(src) && e.getDest().equals(dest)) || (e.getSrc().equals(dest) && e.getDest().equals(src))) {
-                    router.getRouterEdges().remove(e);
+            for (RouterEdge edge : router.getRouterEdges()) {
+                if ((edge.getSrc().equals(src) && edge.getDest().equals(dest)) || (edge.getSrc().equals(dest) && edge.getDest().equals(src))) {
+                    router.getRouterEdges().remove(edge);
+                    routerEdges.remove(edge);
                     break;
                 }
             }
