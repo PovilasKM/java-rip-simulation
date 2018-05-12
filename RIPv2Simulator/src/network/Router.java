@@ -1,3 +1,5 @@
+package network;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -6,8 +8,7 @@ public class Router {
 
     private String ipAddress;
     private final String subnetMask = "255.255.255.0";
-    private String type;
-    private Set<Edge> edges = new HashSet<>();
+    private Set<RouterEdge> routerEdges = new HashSet<>();
     private boolean sentUpdate = false;
     private boolean inactive = false;
     private RoutingTable table;
@@ -37,20 +38,12 @@ public class Router {
         return ipAddress;
     }
 
-    public String getSubnetMask() {
-        return subnetMask;
+    public Set<RouterEdge> getRouterEdges() {
+        return routerEdges;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public Set<Edge> getEdges() {
-        return edges;
-    }
-
-    public void addEdge(Edge edge) {
-        edges.add(edge);
+    public void addEdge(RouterEdge routerEdge) {
+        routerEdges.add(routerEdge);
     }
 
     public RoutingTable getTable() {
@@ -64,7 +57,7 @@ public class Router {
     public void receive(String ip, RoutingTable newTable, List<Router> network) {
         for (int i = 0; i < newTable.getDestinations().size(); i++) {
             int weight = 0;
-            for (Edge e : edges) {
+            for (RouterEdge e : routerEdges) {
                 String srcAdress = e.getSrc();
                 String destAdress = e.getDest();
 
@@ -76,7 +69,6 @@ public class Router {
             }
             if (!table.getDestinations().contains(newTable.getDestinations().get(i)) && !newTable.getDestinations().get(i).equals(this.ipAddress)) {
                 table.addRecord(newTable.getDestinations().get(i), newTable.getMetric().get(i) + weight, ip);
-                //System.out.println("new\n"+newTable.getDestinations().get(i)+" "+ipAddress);
                 sendTableToNeighbors(ip, network);
             } else {
                 int index = table.getDestinations().indexOf(newTable.getDestinations().get(i));
@@ -99,9 +91,9 @@ public class Router {
     }
 
     public void sendTableToNeighbors(String ip, List<Router> network) {
-        for (Edge curEdge : edges) {
-            String srcAdress = curEdge.getSrc();
-            String destAdress = curEdge.getDest();
+        for (RouterEdge curRouterEdge : routerEdges) {
+            String srcAdress = curRouterEdge.getSrc();
+            String destAdress = curRouterEdge.getDest();
 
             String neighbor;
             if (this.getAddress().equals(srcAdress)) {
