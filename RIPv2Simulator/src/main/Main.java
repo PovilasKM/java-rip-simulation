@@ -62,10 +62,10 @@ public class Main {
                     networkGraph.printEdges();
                     break;
                 case 5:
-                    removeEdge(networkGraph);
+                    showTable(networkGraph);
                     break;
                 case 6:
-                    showTable(networkGraph);
+                    removeEdge(networkGraph);
                     break;
                 case 7:
                     sendPacket(networkGraph);
@@ -95,8 +95,8 @@ public class Main {
         System.out.println("2 Add an edge");
         System.out.println("3 See routers' list");
         System.out.println("4 See edges' list");
-        System.out.println("5 Remove an edge");
-        System.out.println("6 Show router's routing table");
+        System.out.println("5 See router's routing table");
+        System.out.println("6 Remove an edge");
         System.out.println("7 Send a packet");
 
     }
