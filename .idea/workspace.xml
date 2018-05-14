@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8a3549a-fa29-4989-b89e-3dab5fa97b82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/main/Main.class" afterPath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/main/Main.class" />
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/network/NetworkGraph.class" afterPath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/network/NetworkGraph.class" />
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/network/Router.class" afterPath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/network/Router.class" />
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/timers/InvalidTimer.class" afterPath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/timers/InvalidTimer.class" />
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/timers/UpdateTimer.class" afterPath="$PROJECT_DIR$/RIPv2Simulator/bin/production/java-rip-simulation/timers/UpdateTimer.class" />
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/src/main/Main.java" afterPath="$PROJECT_DIR$/RIPv2Simulator/src/main/Main.java" />
-      <change beforePath="$PROJECT_DIR$/RIPv2Simulator/src/network/NetworkGraph.java" afterPath="$PROJECT_DIR$/RIPv2Simulator/src/network/NetworkGraph.java" />
-    </list>
+    <list default="true" id="a8a3549a-fa29-4989-b89e-3dab5fa97b82" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -391,16 +383,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526124063152</updated>
-      <workItem from="1526124065751" duration="13130000" />
+      <workItem from="1526124065751" duration="13729000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13130000" />
+    <option name="totallyTimeSpent" value="13729000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -410,7 +401,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37751856" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37751856" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
