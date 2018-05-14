@@ -15,7 +15,8 @@ public class Main {
 
     public static void main(String[] args) {
         NetworkGraph networkGraph = new NetworkGraph();
-/*        networkGraph.addRouter("90.68.53.225");
+/*
+        networkGraph.addRouter("90.68.53.225");
         networkGraph.addRouter("234.191.239.11");
         networkGraph.addRouter("29.237.71.205");
         networkGraph.addRouter("93.205.217.103");
@@ -27,6 +28,7 @@ public class Main {
         networkGraph.addEdge("234.191.239.11", "29.237.71.205", 1);
         networkGraph.addEdge("29.237.71.205", "93.205.217.103", 1);
         networkGraph.addEdge("93.205.217.103", "152.145.34.204", 1);*/
+
         networkGraph.addRouter("111.111.111.111");
         networkGraph.addRouter("222.222.222.222");
         networkGraph.addRouter("333.333.333.333");
@@ -91,6 +93,7 @@ public class Main {
     }
 
     private static void showMenu() {
+        System.out.println("0 to see this list again");
         System.out.println("1 Add a router");
         System.out.println("2 Add an edge");
         System.out.println("3 See routers' list");
@@ -174,6 +177,9 @@ public class Main {
 
     }
 
+    /*
+    option 7 - /sp
+     */
     private static void sendPacket(NetworkGraph networkGraph) {
         System.out.println("Send from:");
         String src = readFromConsole();

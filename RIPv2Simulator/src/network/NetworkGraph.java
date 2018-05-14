@@ -134,9 +134,12 @@ public class NetworkGraph {
             if (r.getAddress().equals(dest))
                 destination = r;
         }
-        if (source == null || destination == null)
+        if (source == null || destination == null) {
             System.out.println("Destination is unreachable");
-        Header header = new Header(src, dest);
-        source.sendPacket(header, routers);
+        } else {
+            Header header = new Header(src, dest);
+            source.sendPacket(header, routers);
+        }
+
     }
 }
