@@ -30,7 +30,7 @@ public class Router {
         this.inactive = status;
     }
 
-    public boolean getInactive() {
+    public boolean isInactive() {
         return inactive;
     }
 
@@ -131,19 +131,19 @@ public class Router {
 
         System.out.print(this.getAddress());
         if (this.getAddress().equals(header.getRoutingDomain())) {
-            System.out.println("Packet arrived!");
+            System.out.println(" : The packet has arrived!");
             return;
         }
 
         if (routingTable.getDestinations().contains(header.getRoutingDomain())) {
             int index = routingTable.getDestinations().indexOf(header.getRoutingDomain());
             if (routingTable.getMetric().get(index) >= 16) {
-                System.out.println("Destination unreachable");
+                System.out.println("Destination is unreachable");
             }
 
             for (Router router : network) {
                 if (router.getAddress().equals(routingTable.getNextHopIP().get(index))) {
-                    System.out.print("->");
+                    System.out.print("-->");
                     router.sendPacket(header, network);
                     break;
                 }

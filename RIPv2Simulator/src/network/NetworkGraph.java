@@ -33,18 +33,18 @@ public class NetworkGraph {
     public void addEdge(String sourceIP, String destIP, int weight) {
         Router src = null;
         Router dest = null;
-        for (Router r : routers) {
-            if (r.getAddress().equals(sourceIP)) {
-                src = r;
-                if (!r.getRoutingTable().getNeighbors().contains(destIP)) {
-                    r.getRoutingTable().addNeighbor(destIP);
+        for (Router router : routers) {
+            if (router.getAddress().equals(sourceIP)) {
+                src = router;
+                if (!router.getRoutingTable().getNeighbors().contains(destIP)) {
+                    router.getRoutingTable().addNeighbor(destIP);
                 }
             }
-            if (r.getAddress().equals(destIP)) {
-                if (!r.getRoutingTable().getNeighbors().contains(sourceIP)) {
-                    r.getRoutingTable().addNeighbor(sourceIP);
+            if (router.getAddress().equals(destIP)) {
+                if (!router.getRoutingTable().getNeighbors().contains(sourceIP)) {
+                    router.getRoutingTable().addNeighbor(sourceIP);
                 }
-                dest = r;
+                dest = router;
             }
         }
         if (src == null || dest == null) {
@@ -52,31 +52,31 @@ public class NetworkGraph {
             return;
         }
 
-        RouterEdge e = new RouterEdge(src, dest, weight);
-        src.addEdge(e);
-        dest.addEdge(e);
+        RouterEdge edge = new RouterEdge(src, dest, weight);
+        src.addEdge(edge);
+        dest.addEdge(edge);
         dest.receive(sourceIP, src.getRoutingTable(), routers);
         src.receive(destIP, dest.getRoutingTable(), routers);
 
-        routerEdges.add(e);
+        routerEdges.add(edge);
     }
 
     public void printRouters() {
-        for (Router r : routers) {
-            System.out.println(r.getAddress());
+        for (Router router : routers) {
+            System.out.println(router.getAddress());
         }
     }
 
     public void printEdges() {
-        for (RouterEdge e : routerEdges) {
-            System.out.println(e.getSrc() + " --- " + e.getDest() + " --- " + e.getWeight());
+        for (RouterEdge edge : routerEdges) {
+            System.out.println(edge.getSrc() + " --- " + edge.getDest() + " --- " + edge.getWeight());
         }
     }
 
     public void printTable(String ip) {
-        for (Router r : routers) {
-            if (r.getAddress().equals(ip))
-                System.out.print(r.getRoutingTable().toString());
+        for (Router router : routers) {
+            if (router.getAddress().equals(ip))
+                System.out.print(router.getRoutingTable().toString());
         }
     }
 
