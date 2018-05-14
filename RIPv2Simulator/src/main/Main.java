@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        boolean show = true;
         NetworkGraph networkGraph = new NetworkGraph();
 /*
         networkGraph.addRouter("90.68.53.225");
@@ -35,8 +36,8 @@ public class Main {
         networkGraph.addRouter("444.444.444.444");
         networkGraph.addRouter("555.555.555.555");
 
-        networkGraph.addEdge("111.111.111.111", "222.222.222.222", 1);
         networkGraph.addEdge("111.111.111.111", "333.333.333.333", 1);
+        networkGraph.addEdge("111.111.111.111", "222.222.222.222", 1);
         networkGraph.addEdge("222.222.222.222", "444.444.444.444", 1);
         networkGraph.addEdge("222.222.222.222", "333.333.333.333", 1);
         networkGraph.addEdge("333.333.333.333", "444.444.444.444", 1);
@@ -44,7 +45,7 @@ public class Main {
 
         showMenu();
         Scanner in = new Scanner(System.in);
-        while (true) {
+        while (show) {
             int input = in.nextInt();
 
             switch (input) {
@@ -73,7 +74,8 @@ public class Main {
                     sendPacket(networkGraph);
                     break;
                 case 8:
-                    return;
+                    show = false;
+                    break;
                 default:
                     System.out.println("Wrong input. Type 0 to see the menu");
                     break;
